@@ -20,26 +20,20 @@ original_list = [[3, 36, 74, 75, 85, 44, 68, 39, 45, 42, 35, 39, 75, 46, 52, 39,
  [55, 48, 49, 55, 89, 68, 75, 90, 76, 72, 34, 72, 78, 78, 78, 39, 47, 63, 76, 42],
  [73, 78, 25, 90, 49, 42, 78, 45, 71, 29, 71, 36, 76, 60, 49, 84, 34, 88, 36, 51]]
 
-max_list = original_list
-min_list = original_list
+max_list = list(original_list)
 
 for i in range(1, 20):
  max_list[0][i] = max_list[0][i - 1] + max_list[0][i]
  max_list[i][0] = max_list[i - 1][0] + max_list[i][0]
 
-for i in range(3, 15):
- max_list[i][6] = max_list[i - 1][6] + original_list[i][6]
-
-for i in range(11, 17):
- max_list[17][i] = max_list[17][i - 1] + original_list[17][i]
-
 for i in range(1, 20):
  for j in range(1, 20):
-  if ((i != 17 and (j < 11 or j > 16)) and (j != 7 and (i<3 or i > 14))):
+  if (i > 2 and i < 15 and j == 6):
+   max_list[i][j] = max_list[i-1][j] + original_list[i][j]
+  elif i==17 and j>10 and j<17:
+   max_list[i][j] = max_list[i][j - 1] + original_list[i][j]
+  else:
    max_list[i][j] = original_list[i][j] + max(max_list[i][j - 1], max_list[i - 1][j])
 
-for i in range(11, 17):
-  print(max_list[17][i])
-
 print("Максимальная денежная сумма =", max_list[19][19])
-print("Минимальная денежная сумма =", min_list[19][19])
+print("Минимальная денежная сумма =", original_list[19][19])
